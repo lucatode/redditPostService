@@ -7,7 +7,6 @@ import com.lucatode.redditPostService.domain.repository.ErogationRepository;
 import com.lucatode.redditPostService.domain.repository.PostRepository;
 import com.lucatode.redditPostService.domain.service.PostEvaluationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -32,12 +31,11 @@ public class PostErogationUseCase {
     public Post getPost(PostRequest request) {
 
         List<ErogatedPost> erogatedPosts = erogationRepository.getErogatedPosts(request);
+
         List<Post> nonErogatedPosts = postRepository.getNonErogatedPosts(erogatedPosts);
 
-        //TODO: add logic here
         Post candidate = postEvaluationService.evaluate(nonErogatedPosts);
 
-        //TODO: save erogated post
         erogationRepository.save(candidate.getId(), request.getChatId());
 
         return candidate;
