@@ -6,6 +6,7 @@ import com.lucatode.redditPostService.domain.entity.Post;
 import com.lucatode.redditPostService.domain.entity.PostRequest;
 import com.lucatode.redditPostService.domain.repository.ErogationRepository;
 import com.lucatode.redditPostService.domain.repository.PostRepository;
+import com.lucatode.redditPostService.domain.service.PostEvaluationService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,11 +30,13 @@ public class PostErogationUseCaseTest {
     ErogationRepository erogationRepository;
     @Mock
     PostRepository postRepository;
+    @Mock
+    PostEvaluationService postEvaluationService;
 
 
     @Before
     public void setUp(){
-        postErogationUseCase = new PostErogationUseCase(erogationRepository, postRepository);
+        postErogationUseCase = new PostErogationUseCase(erogationRepository, postRepository,postEvaluationService);
     }
 
     @Test

@@ -50,4 +50,11 @@ public class ErogatedPostClient implements MongoDbClient<ErogatedPost> {
 
         return list;
     }
+
+    @Override
+    public void put(ErogatedPost record) {
+        MongoDatabase database = mongoClient.getDatabase("funfacts");
+        MongoCollection<Document> collection = database.getCollection(collectionName);
+        collection.insertOne(new ErogatedPostBson.Builder().withChatId(record.getChatId()).withPostId(record.getPostId()).build().toDocument());
+    }
 }

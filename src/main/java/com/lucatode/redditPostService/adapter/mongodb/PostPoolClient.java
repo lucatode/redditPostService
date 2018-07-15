@@ -48,4 +48,9 @@ public class PostPoolClient implements MongoDbClient<Post> {
         }
         return list;
     }
+
+    @Override
+    public void put(Post record) {
+
+    }
 }

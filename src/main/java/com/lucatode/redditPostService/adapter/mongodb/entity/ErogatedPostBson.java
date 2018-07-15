@@ -24,6 +24,10 @@ public class ErogatedPostBson {
                 .build();
     }
 
+    public Document toDocument() {
+        return new Document("chatId", chatId)
+                .append("postId", postId);
+    }
     private ErogatedPostBson(Builder builder) {
         chatId = builder.chatId;
         postId = builder.postId;
