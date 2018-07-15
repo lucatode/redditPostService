@@ -30,6 +30,8 @@ public class PostErogationUseCase {
 
         //TODO: add logic here
 
+        //TODO: save erogated post
+
         return nonErogatedPosts.stream().findFirst().get();
     }
 }

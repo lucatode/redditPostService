@@ -38,7 +38,7 @@ public class PostPoolClient implements MongoDbClient<Post> {
         MongoCursor<Document> cursor = collection.find().iterator();
         List<Post> list = new ArrayList<>();
 
-        try { 
+        try {
             while (cursor.hasNext()) {
                 final PostBson erogatedPost = new PostBson.PostBsonBuilder().fromDocument(cursor.next()).build();
                 list.add(erogatedPost.toPost());
@@ -46,7 +46,6 @@ public class PostPoolClient implements MongoDbClient<Post> {
         } finally {
             cursor.close();
         }
-
         return list;
     }
 }
