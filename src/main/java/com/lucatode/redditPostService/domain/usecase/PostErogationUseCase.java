@@ -1,9 +1,12 @@
 package com.lucatode.redditPostService.domain.usecase;
 
+import com.lucatode.redditPostService.domain.entity.ErogatedPost;
 import com.lucatode.redditPostService.domain.entity.Post;
 import com.lucatode.redditPostService.domain.entity.PostRequest;
 import com.lucatode.redditPostService.domain.repository.ErogationRepository;
 import com.lucatode.redditPostService.domain.repository.PostRepository;
+
+import java.util.List;
 
 public class PostErogationUseCase {
 
@@ -17,6 +20,9 @@ public class PostErogationUseCase {
 
     public Post getPost(PostRequest request) {
 
-       return erogationRepository.getErogatedPosts(request).stream().findFirst().get();
+        List<ErogatedPost> erogatedPosts = erogationRepository.getErogatedPosts(request);
+        List<Post> nonErogatedPosts = postRepository.getNonErogatedPosts(erogatedPosts);
+
+        return nonErogatedPosts.stream().findFirst().get();
     }
 }
